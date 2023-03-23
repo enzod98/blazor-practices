@@ -1,1 +1,1 @@
-Prácticas de Razor
+Prácticas de Blazor

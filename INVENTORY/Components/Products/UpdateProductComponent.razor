@@ -6,10 +6,6 @@
 <div>
     <EditForm Model="oProduct">
         <div class="form-group">
-            <label>Referencia:</label>
-            <InputText @bind-Value="oProduct.ProductId" class="form-control"/>
-        </div>
-        <div class="form-group">
             <label>Nombre del producto:</label>
             <InputText @bind-Value="oProduct.ProductName" class="form-control" />
         </div>
@@ -21,29 +17,33 @@
         <div class="form-group">
             <label>Categoría:</label>
             <InputSelect @bind-Value="oProduct.CategoryId" class="form-control">
-                @foreach(var item in categories)
+                @foreach (var item in categories)
                 {
-                    <option value="@item.CategoryId" >@item.CategoryName</option>
+                    <option value="@item.CategoryId">@item.CategoryName</option>
                 }
             </InputSelect>
         </div>
 
-        <input type="button" value="Guardar Producto" @onclick="SaveProduct" />
+        <input type="button" value="Guardar Producto" @onclick="UpdateProduct" />
     </EditForm>
 </div>
 
 @code {
+    [Parameter]
+    public string ProductId { get; set; }
+
     ProductEntity oProduct = new ProductEntity();
     List<CategoryEntity> categories = new List<CategoryEntity>();
 
     protected override async Task OnInitializedAsync()
     {
         categories = B_Category.EntityList();
+        oProduct = B_Product.GetProductByID(ProductId);
     }
 
-    private void SaveProduct()
+    private void UpdateProduct()
     {
-        B_Product.CreateItem(oProduct);
+        B_Product.UpdateItem(oProduct);
         NavManager.NavigateTo("products/list");
     }
 

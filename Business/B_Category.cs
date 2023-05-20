@@ -8,9 +8,9 @@ using Business.Interfaces;
 
 namespace Business
 {
-    public class B_Category : ICRUData<CategoryEntity>
+    public class B_Category
     {
-        public List<CategoryEntity> EntityList()
+        public static List<CategoryEntity> EntityList()
         {
             using(var db = new InventaryContext())
             {

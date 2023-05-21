@@ -1,6 +1,7 @@
 ﻿using Business.Interfaces;
 using DataAccess;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace Business
 {
-    public class B_Storage 
+    public class B_Storage
     {
         public static void CreateItem(StorageEntity oEntity)
         {
@@ -35,6 +36,18 @@ namespace Business
             using (var db = new InventaryContext())
             {
                 return db.Storages.ToList();
+            }
+        }
+
+        public static List<StorageEntity> EntityListByWarehouse(string warehouseId)
+        {
+            using (var db = new InventaryContext())
+            {
+                return db.Storages
+                        .Include(s => s.Product)
+                        .Include(s => s.Warehouse)
+                        .Where(x => x.WarehouseId == warehouseId)
+                        .ToList();
             }
         }
 

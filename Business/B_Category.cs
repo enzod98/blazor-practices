@@ -18,7 +18,15 @@ namespace Business
             }
         }
 
-        public void CreateItem(CategoryEntity oEntity)
+        public static CategoryEntity GetCategoryByID(string ID)
+        {
+            using (var db = new InventaryContext())
+            {
+                return db.Categories.Where(x => x.CategoryId == ID).FirstOrDefault();
+            }
+        }
+
+        public static void CreateItem(CategoryEntity oEntity)
         {
             using(var db = new InventaryContext())
             {
@@ -27,7 +35,7 @@ namespace Business
             }
         }
 
-        public void UpdateItem(CategoryEntity oEntity) 
+        public static void UpdateItem(CategoryEntity oEntity) 
         {
             using(var db = new InventaryContext())
             {

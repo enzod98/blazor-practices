@@ -19,7 +19,7 @@ namespace Entities
 
         public string ProductId { get; set; }
         public ProductEntity Product { get; set; }
-        public string WherehouseId { get; set; }
+        public string WarehouseId { get; set; }
         public WarehouseEntity Warehouse { get; set; }
         public ICollection<InputOutputEntity> InputOutputs { get; set; }
     }

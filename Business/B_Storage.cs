@@ -8,9 +8,9 @@ using System.Text;
 
 namespace Business
 {
-    public class B_Storage : ICRUData<StorageEntity>
+    public class B_Storage 
     {
-        public void CreateItem(StorageEntity oEntity)
+        public static void CreateItem(StorageEntity oEntity)
         {
             using (var db = new InventaryContext())
             {
@@ -19,7 +19,18 @@ namespace Business
             }
         }
 
-        public List<StorageEntity> EntityList()
+
+        public static bool IsProductInWarehouse(string idProduct)
+        {
+            using (var db = new InventaryContext())
+            {
+                var product = db.Storages.FirstOrDefault(x => x.StorageId == idProduct);
+
+                return product != null;
+            }
+        }
+
+        public static List<StorageEntity> EntityList()
         {
             using (var db = new InventaryContext())
             {
@@ -27,7 +38,7 @@ namespace Business
             }
         }
 
-        public void UpdateItem(StorageEntity oEntity)
+        public static void UpdateItem(StorageEntity oEntity)
         {
             using (var db = new InventaryContext())
             {

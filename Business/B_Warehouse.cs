@@ -8,9 +8,9 @@ using System.Text;
 
 namespace Business
 {
-    public class B_Warehouse : ICRUData<WarehouseEntity>
+    public class B_Warehouse
     {
-        public void CreateItem(WarehouseEntity oEntity)
+        public static void CreateItem(WarehouseEntity oEntity)
         {
             using (var db = new InventaryContext())
             {
@@ -19,7 +19,7 @@ namespace Business
             }
         }
 
-        public List<WarehouseEntity> EntityList()
+        public static List<WarehouseEntity> EntityList()
         {
             using (var db = new InventaryContext())
             {
@@ -27,7 +27,7 @@ namespace Business
             }
         }
 
-        public void UpdateItem(WarehouseEntity oEntity)
+        public static void UpdateItem(WarehouseEntity oEntity)
         {
             using (var db = new InventaryContext())
             {
